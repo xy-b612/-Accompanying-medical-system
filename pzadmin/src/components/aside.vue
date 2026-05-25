@@ -24,18 +24,15 @@ const router = useRouter();
 //const menuData = reactive(router.options.routes[0].children);
 const store = useStore();
 const menuData = computed(() => store.state.menu.routerList)
+// console.log('menuData:', JSON.parse(JSON.stringify(menuData.value)))
 
 const isCollapse = computed(() => store.state.menu.isCollapse);
 
 const active = computed(() => store.state.menu.menuActive)
 
-const handleOpen = () => {
+const handleOpen = () => {}
+const handleClose = () => {}
 
-}
-
-const handleClose = () => {
-
-}
 
 </script>
 

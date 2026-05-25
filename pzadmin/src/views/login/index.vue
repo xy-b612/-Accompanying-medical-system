@@ -43,7 +43,7 @@ import { ElMessage } from 'element-plus';
 import { onUnmounted, reactive, ref, computed, toRaw } from 'vue'
 import { getCode, userAuthentication, login, menuPermissions } from '@/api/index'
 import { useRouter } from 'vue-router';
-import { useStore } from 'vuex/dist/vuex.cjs.js';
+import { useStore } from 'vuex';
 const imgUrl = new URL('../../assets/images/login-head.png', import.meta.url).href
 
 //表单数据
@@ -160,16 +160,13 @@ const submitForm = async (formEl) => {
                 login(loginForm).then(res => {
                     if (res.code === 10000) {
                         ElMessage.success('登录成功')
-                        console.log(res.data)
+                        // console.log(res.data)
                         //将用户信息存储在localStorage中
                         localStorage.setItem('pz_token', res.data.token)
                         localStorage.setItem('pz_userInfo', JSON.stringify(res.data.userInfo))
                         menuPermissions().then(res => {
                             store.commit('dynamicMenu', res.data)
                             console.log(routerList.value, 'routerList');
-                            toRaw(routerList.value).forEach(item => {
-                                router.addRoute('main',item)
-                            });
                             router.push('/')
                         })
                     }

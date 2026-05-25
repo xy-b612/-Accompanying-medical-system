@@ -50,7 +50,7 @@ const route = useRoute()
 
 onMounted(() => {
     userGetMenu().then(res => {
-        console.log('权限数据', res)
+        // console.log('权限数据', res)
         permissionsData.value = res.data
     })
     getListData()
@@ -93,7 +93,7 @@ const handleCurrentChange = (val) => {
 //请求列表数据
 const getListData = () => {
     menuList(pagenationData).then(res => {
-        console.log('列表数据', res)
+        // console.log('列表数据', res)
         const { list, total } = res.data
         tableData.list = list
         tableData.total = total

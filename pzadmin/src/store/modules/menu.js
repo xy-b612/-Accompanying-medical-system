@@ -1,12 +1,11 @@
-const localData = localStorage.getItem('pz_v3pz')
-
-const state = localData ? localData.menu : {
+const localDataStr = localStorage.getItem('pz_v3pz')
+const localData = localDataStr ? JSON.parse(localDataStr) : null
+const state = localData?.menu ?? {
     isCollapse: false,
     selectMenu: [],
     routerList: [],
     menuActive: '1-1'
 }
-
 const mutations = {
     collapseMenu(state) {
         state.isCollapse = !state.isCollapse
@@ -26,8 +25,8 @@ const mutations = {
     dynamicMenu(state, payload) {
         //console.log(payload);
         //通过glob导入文件
-        const modules = import.meta.glob('@/views/**/*.vue')
-        console.log(modules);
+        const modules = import.meta.glob('@/views/**/**/*.vue')
+        console.log('数据',modules);
         function routerSet(router) {
             router.forEach(route => {
                 //判断没有子菜单，拼接路由数据
