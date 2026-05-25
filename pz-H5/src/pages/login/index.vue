@@ -15,13 +15,12 @@
 </template>
 
 <script setup>
-import { ref, reactive, getCurrentInstance } from 'vue'
+import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import { Login } from '../../api/index'
 
 const router = useRouter()
 
-//获取当前vue实例
-const { proxy } = getCurrentInstance()
 //表单数据
 const formData = reactive({
     userName: '',
@@ -29,7 +28,7 @@ const formData = reactive({
 })
 //表单提交
 const onSubmit = async () => {
-    const res = await proxy.$api.login(formData)
+    const res = await Login(formData)
     //console.log(res);
     if (res.code === 10000) {
         localStorage.setItem('h5_token', res.data.token)

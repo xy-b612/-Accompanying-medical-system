@@ -17,7 +17,7 @@ const router = useRouter()
 const route = useRoute()
 
 onMounted(() => {
-    console.log(router);
+    // console.log(router);
     const data = router.options.routes[0]
     active.value = data.children.findIndex(item => '/' + item.path === route.path)
 })

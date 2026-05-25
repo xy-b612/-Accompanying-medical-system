@@ -10,27 +10,42 @@
         </div>
     </div>
     <!-- 轮播图 -->
-    <!-- 后端图片服务器证书过期，改成模拟数据 -->
     <van-swipe class="my-swiper" height="170" :autoplay="3000" indicator-color="white">
-        <van-swipe-item>
-            <van-image radius="5" :src="img1" fit="cover" />
+        <van-swipe-item v-for="item in homeData.slides" :key="item.id">
+            <van-image radius="5" :src="item.
+                pic_image_url" />
         </van-swipe-item>
     </van-swipe>
     <van-row justify="space-around">
         <van-col class="center-img" v-for="(item, index) in homeData.nav2s" :key="item.id" span="11"
             @click="goOrderTwo(index)">
-            <van-image radius="15" :src="img1"/>
-            </van-col>
+            <van-image :src="item.pic_image_url" />
+        </van-col>
+    </van-row>
+    <van-row @click="goOrder(item)" class="yy-list" v-for="item in homeData.hospitals" justify="space-around">
+        <van-col span="6">
+            <van-image width="100" height="90" :src="item.avatar_url" />
+        </van-col>
+        <van-col class="yy" span="15">
+            <div class="yy-name">{{ item.name }}</div>
+            <div class="yy-type">
+                <span>{{ item.rank }}</span>
+                &nbsp;
+                <span>{{ item.label }}</span>
+            </div>
+            <div class="yy-text">
+                {{ item.intro }}
+            </div>
+        </van-col>
     </van-row>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, getCurrentInstance } from 'vue';
-import img1 from '../../assets/轮播图备用.png'
+import { ref, reactive, onMounted } from 'vue';
+import { Index } from '../../api/index'
+import {useRouter} from 'vue-router'
 
 const searchValue = ref('')
-//获取当前vue实例
-const { proxy } = getCurrentInstance()
 
 //首页数据
 const homeData = reactive({
@@ -41,13 +56,18 @@ const homeData = reactive({
     slides: []
 })
 //快捷入口
-const goOrderTwo = ()=>{
-
+const router = useRouter()
+const goOrderTwo = (index) => {
+    router.push(`/createOrder?id=${homeData.hospitals[index].id}`)
+}
+//医院列表
+const goOrder = (item) => {
+    router.push(`/hospitalDetail?id=${item.id}`)
 }
 onMounted(async () => {
-    const res = await proxy.$api.home()
+    const res = await Index()
     Object.assign(homeData, res.data)
-    console.log(homeData);
+    // console.log(homeData);
 
 })
 </script>
