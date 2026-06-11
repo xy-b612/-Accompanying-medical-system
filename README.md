@@ -138,4 +138,4 @@ didi-peizhen/
 ### 📸 部分界面预览
 ![C端首页](./image/C端首页.png)		
 ![订单创建](./image/订单创建.png)	
-![陪护师管理](./image/陪护师管理.png)
+![陪护师管理](./image/后台陪护师管理.png)
