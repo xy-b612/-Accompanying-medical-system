@@ -19,7 +19,7 @@ const route = useRoute()
 const getTabIndex = (path) => {
     if (path.startsWith('/home')) return 0
     if (path.startsWith('/order') || path.startsWith('/detail')) return 1
-    if (path.startsWith('/profile')) return 2
+    if (path.startsWith('/user')) return 2
     return 0
 }
 
